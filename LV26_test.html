@@ -157,9 +157,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* ===== Legend ===== */
 #legend {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    position: static;
+    top: auto;
+    right: auto;
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(10px);
     border-radius: 12px;
@@ -205,9 +205,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Toggle */
 #legend-toggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    position: static;
+    top: auto;
+    right: auto;
     background: #ffffffdd;
     padding: 5px 10px;
     border-radius: 8px;
@@ -250,12 +250,23 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* ===== FIX OVERLAP (LEGEND vs MAP CONTROLS) ===== */
 
-#legend {
+#legend-wrap {
+    position: absolute;
     top: 60px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 10000;
+}
+
+#legend {
+    position: static;
+    margin-top: 4px;
 }
 
 #legend-toggle {
-    top: 60px;
+    position: static;
 }
 
 .leaflet-top.leaflet-right {
@@ -297,10 +308,11 @@ input[type="range"] {
 
 </div>
 
-<div id="legend-toggle" onclick="toggleLegend()">Legenda</div>
-
-<div id="legend">
-    <h3>Legenda</h3>
+<div id="legend-wrap">
+    <div id="legend-toggle" onclick="toggleLegend()">Legenda</div>
+    <div id="legend">
+        <h3>Legenda LV2026</h3>
+    </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

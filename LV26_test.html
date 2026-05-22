@@ -285,10 +285,9 @@ input[type="range"] {
     <button onclick="togglePlay()" id="playBtn">▶</button>
     <button onclick="resetTime()">⏹</button>
 
-    <div style="display:flex; align-items:center; gap:6px; flex:0 0 180px;">
-        <span style="font-size:12px;">0.5×</span>
-        <input type="range" min="0.5" max="10" step="0.5" value="1" id="speedControl" style="flex:1;">
-        <span style="font-size:12px;">10×</span>
+    <div style="display:flex; align-items:center; gap:6px; flex:0 0 200px;">
+        <input type="range" min="0.1" max="10" step="0.1" value="1" id="speedControl" style="flex:1;">
+        <span id="speedLabel" style="font-size:12px; font-weight:bold; min-width:34px; text-align:right;">1×</span>
     </div>
 
     <div id="time-row">
@@ -141842,7 +141841,10 @@ const endTime = Math.max(...Object.values(tracks).flat().map(p => p.time));
 
 timeSlider.min = startTime;
 timeSlider.max = endTime;
-speedControl.oninput = e => speed = +e.target.value;
+speedControl.oninput = e => {
+    speed = +e.target.value;
+    document.getElementById('speedLabel').innerText = speed % 1 === 0 ? speed + '×' : speed.toFixed(1) + '×';
+};
 
 timeSlider.oninput = e => {
     currentTime = +e.target.value;
